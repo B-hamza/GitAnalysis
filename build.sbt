@@ -12,6 +12,8 @@ libraryDependencies ++= Seq(
   javaWs
 )
 
+EclipseKeys.preTasks := Seq(compile in Compile)
+
 // Play provides two styles of routers, one expects its actions to be injected, the
 // other, legacy style, accesses its actions statically.
 routesGenerator := InjectedRoutesGenerator

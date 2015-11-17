@@ -1,0 +1,10 @@
+
+
+
+<div class="search">
+	<input ng-model="input" ng-change="doSearch(input)" autofocus>
+	<h2>There are {{ results.length }} results</h2>
+	<ul>
+		<li ng-repeat="result in results">{{ result }}</li>
+	</ul>
+</div>
