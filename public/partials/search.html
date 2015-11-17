@@ -1,10 +1,34 @@
 
-
-
 <div class="search">
-	<input ng-model="input" ng-change="doSearch(input)" autofocus>
-	<h2>There are {{ results.length }} results</h2>
-	<ul>
-		<li ng-repeat="result in results">{{ result }}</li>
-	</ul>
+
+    
+      
+	<h2>There are {{ results.items.length }} results</h2>
+
+
+	<table class="table table-striped table-hover ">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Full Name</th>
+				<th>Url</th>
+			</tr>
+		</thead>
+		
+		<tr dir-paginate="result in results.items | itemsPerPage: itemPage" class="active" ng-class="{'success':$index == selectedRow}" ng-click="setClickedRow($index)">
+			<td>{{index}}</td>
+			<td>{{ result.id }}</td>
+			<td>{{ result.name }}</td>
+			<td>{{ result.full_name }}</td>
+			<td>{{ result.url }}</td>
+		</tr>
+		</tbody>
+	</table>
+		<dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+
+
+		<p>this is : {{results.items[selectedRow+numselectionbypage]}}</p>
+
 </div>

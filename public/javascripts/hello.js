@@ -5,7 +5,7 @@
 
 var app = angular.module('routeApp', 
 		// dépendances du "module"
-		['ngRoute', 'routeAppControllers']);
+		['ngRoute', 'routeAppControllers', 'angularUtils.directives.dirPagination']);
 
 
 // configuration du systèmes de routage
@@ -31,6 +31,7 @@ var routeAppControllers = angular.module('routeAppControllers', []);
 
 routeAppControllers.controller('SearchController', function($scope,$routeParams, $http) {
     $scope.results = [];
+    $scope.itemPage = 10; // mettre la pagination à 10
     $scope.input = $routeParams.input;
     $scope.doSearch = function() {
         var httpRequest = $http({
@@ -43,7 +44,15 @@ routeAppControllers.controller('SearchController', function($scope,$routeParams,
         });
          
     };
-    // run the search when the page loads.
+    $scope.numselectionbypage=0;// pour la mise a jour du selectedRow lors de la pagination
+    $scope.selectedRow = null;
+    $scope.setClickedRow = function(index){  // mettre le selectedRow à la valeur d'index à chaque clique
+        $scope.selectedRow = index;
+     }
+    $scope.pageChangeHandler = function(num) { 
+    	$scope.numselectionbypage = (num-1)*$scope.itemPage
+    };
+// chercher au chargement de la page
     $scope.doSearch();
 });
 

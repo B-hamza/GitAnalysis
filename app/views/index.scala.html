@@ -5,12 +5,13 @@
   
     
     
-    <nav>
-          <a href="#/search" class="btn btn-primary">Search</a>
-          <a href="#/analytics" class="btn btn-success">Analytics</a>
-    </nav>
+    
+    
+    <h1>Your search here</h1>
+	<input ng-model="input" ng-change="doSearch(input)" autofocus>
+ 	<a href="#/search" class="btn btn-primary">Search</a>
        
-    <div ng-view>
-    </div>
+    <section ng-view>
+    </section>
 
 }

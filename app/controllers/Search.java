@@ -47,8 +47,9 @@ public class Search extends Controller {
 
     	String result = "";
   	  try {
-
-  		URL url = new URL("https://api.github.com/search/repositories?q=tetris+anguage:assembly&sort=stars&order=desc");
+  		Logger.debug("call the service search with JXRS");
+  		
+  		URL url = new URL("https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc");
   		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
   		conn.setRequestMethod("GET");
   		conn.setRequestProperty("Accept", "application/json");
@@ -63,7 +64,6 @@ public class Search extends Controller {
 
   		String output;
   		
-  		System.out.println("Output from Server .... \n");
   		while ((output = br.readLine()) != null) {
   			result += output;
   		}
