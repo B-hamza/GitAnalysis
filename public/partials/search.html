@@ -3,7 +3,7 @@
 
     
       
-	<h2>There are {{ results.items.length }} results</h2>
+	<h2>There are {{ results.length }} results</h2>
 
 
 	<table class="table table-striped table-hover ">
@@ -17,7 +17,7 @@
 			</tr>
 		</thead>
 		
-		<tr dir-paginate="result in results.items | itemsPerPage: itemPage" class="active" ng-class="{'success':$index == selectedRow}" ng-click="setClickedRow($index)">
+		<tr dir-paginate="result in results | itemsPerPage: itemPage" class="active" ng-class="{'success':$index == selectedRow}" ng-click="setClickedRow($index)">
 			<td>{{index}}</td>
 			<td>{{ result.id }}</td>
 			<td>{{ result.name }}</td>
@@ -35,8 +35,8 @@
     <h3 class="panel-title">Selected Ressource</h3>
   </div>
   <div class="row panel-body">
-    <p class = "col-sm-8">this is : {{results.items[selectedRow+numselectionbypage].full_name}}</p>
-    <a href="#" class="btn btn-default pull-right">Analytics</a>
+    <p class = "col-sm-8">this is : {{results[selectedRow+numselectionbypage].id}}</p>
+    <a href="#/analytics/{{results[selectedRow+numselectionbypage].id}}" class="btn btn-default pull-right">Analytics</a>
   </div>
 </div>
 		

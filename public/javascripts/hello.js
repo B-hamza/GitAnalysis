@@ -16,7 +16,7 @@ app.config([ '$routeProvider', function($routeProvider) {
 	$routeProvider.when('/search/:input?', {
 		templateUrl : '/assets/partials/search.html',
 		controller : 'SearchController'
-	}).when('/analytics', {
+	}).when('/analytics/:input?', {
 		templateUrl : '/assets/partials/analytics.html',
 		controller : 'AnalyticsController'
 	})
@@ -69,8 +69,22 @@ routeAppControllers.controller('SearchController', function($scope,$routeParams,
 });
 
 
-routeAppControllers.controller('AnalyticsController', function($scope){
+routeAppControllers.controller('AnalyticsController', function($scope,$routeParams,$http){
 	$scope.message = "this is the analyics";
+	$scope.input = $routeParams.input;
+	$scope.commits=[];
+    $scope.doGetCommitsFromRepo = function() {
+        var httpRequest = $http({
+            method : 'GET',
+            url : "/repositories/" + $scope.input,
+        }).success(function(data, status) {
+            $scope.commits = data;
+        }).error(function(arg) {
+            alert("error ");
+        });
+         
+    };
+	$scope.doGetCommitsFromRepo();
 });
 
 

@@ -3,6 +3,14 @@
 <section class="analytics">
     <h2>Page d'analyse</h2>
     <p>
-        {{ message }}
+        {{ message }}  {{ input }}
+        {{commits.length}}
     </p>
+    
+    <ul ng-repeat="commit in commits">
+    	<li>{{commit.commit.committer.name}}</li>
+    	<li>{{commit.commit.committer.email}}</li>
+    	<li>{{commit.commit.committer.date}}</li>
+    </ul>
+    
 </section>

@@ -9,8 +9,12 @@ scalaVersion := "2.11.6"
 libraryDependencies ++= Seq(
   javaJdbc,
   cache,
-  javaWs
+  javaWs,
+  "org.kohsuke" % "github-api" % "1.70"
 )
+
+resolvers += Resolver.typesafeRepo("releases")
+resolvers += "Github-API" at "http://repo.jenkins-ci.org/public/"
 
 EclipseKeys.preTasks := Seq(compile in Compile)
 
