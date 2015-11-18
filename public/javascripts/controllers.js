@@ -1,35 +1,9 @@
 'use strict';
-
-
-// déclaration de l'application routeApp
-
-var app = angular.module('routeApp', 
-		// dépendances du "module"
-		['ngRoute', 'routeAppControllers', 'angularUtils.directives.dirPagination']);
-
-
-// configuration du systèmes de routage
-
-app.config([ '$routeProvider', function($routeProvider) {
-
-	// Système de routage
-	$routeProvider.when('/search/:input?', {
-		templateUrl : '/assets/partials/search.html',
-		controller : 'SearchController'
-	}).when('/analytics/:input?', {
-		templateUrl : '/assets/partials/analytics.html',
-		controller : 'AnalyticsController'
-	})
-	.otherwise({
-            redirectTo: '/'
-        });
-} ]);
-
 // définition des contrôleurs
 
-var routeAppControllers = angular.module('routeAppControllers', []);
+angular.module('routeAppControllers', []);
 
-routeAppControllers.controller('rootController', function($scope,$routeParams,$location){
+angular.module('routeAppControllers').controller('rootController', function($scope,$routeParams,$location){
 	$scope.message = "this is the analyics";
 	$scope.input = $routeParams.input;
 	$scope.enterTodo = function(input,event){
@@ -41,7 +15,7 @@ routeAppControllers.controller('rootController', function($scope,$routeParams,$l
 
 
 
-routeAppControllers.controller('SearchController', function($scope,$routeParams, $http) {
+angular.module('routeAppControllers').controller('SearchController', function($scope,$routeParams, $http) {
     $scope.results = [];
     $scope.itemPage = 10; // mettre la pagination à 10
     $scope.input = $routeParams.input;
@@ -69,7 +43,7 @@ routeAppControllers.controller('SearchController', function($scope,$routeParams,
 });
 
 
-routeAppControllers.controller('AnalyticsController', function($scope,$routeParams,$http){
+angular.module('routeAppControllers').controller('AnalyticsController', function($scope,$routeParams,$http){
 	$scope.message = "this is the analyics";
 	$scope.input = $routeParams.input;
 	$scope.commits=[];
@@ -86,7 +60,4 @@ routeAppControllers.controller('AnalyticsController', function($scope,$routePara
     };
 	$scope.doGetCommitsFromRepo();
 });
-
-
-
 
