@@ -22,12 +22,24 @@ app.config([ '$routeProvider', function($routeProvider) {
 	})
 	.otherwise({
             redirectTo: '/'
-        });;
+        });
 } ]);
 
 // définition des contrôleurs
 
 var routeAppControllers = angular.module('routeAppControllers', []);
+
+routeAppControllers.controller('rootController', function($scope,$routeParams,$location){
+	$scope.message = "this is the analyics";
+	$scope.input = $routeParams.input;
+	$scope.enterTodo = function(input,event){
+		if(event.keyCode ==13){ // ENTER_KEY
+			$location.path('/search/'+input);
+		}
+	}
+});
+
+
 
 routeAppControllers.controller('SearchController', function($scope,$routeParams, $http) {
     $scope.results = [];
@@ -60,4 +72,7 @@ routeAppControllers.controller('SearchController', function($scope,$routeParams,
 routeAppControllers.controller('AnalyticsController', function($scope){
 	$scope.message = "this is the analyics";
 });
+
+
+
 

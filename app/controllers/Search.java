@@ -49,7 +49,7 @@ public class Search extends Controller {
   	  try {
   		Logger.debug("call the service search with JXRS");
   		
-  		URL url = new URL("https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc");
+  		URL url = new URL("https://api.github.com/search/repositories?q="+term+"+language:assembly&sort=stars&order=desc");
   		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
   		conn.setRequestMethod("GET");
   		conn.setRequestProperty("Accept", "application/json");

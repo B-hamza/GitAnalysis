@@ -6,12 +6,12 @@
     
     
     
-    
-    <h1>Your search here</h1>
-	<input ng-model="input" ng-change="doSearch(input)" autofocus>
- 	<a href="#/search" class="btn btn-primary">Search</a>
-       
-    <section ng-view>
-    </section>
-
+    <div ng-controller = 'rootController'>
+	    <h1>Your search here</h1>
+		<input ng-model="input" ng-keyUp="enterTodo(input,$event)" autofocus>
+	 	<a href="#/search/{{input}}" class="btn btn-primary">Search</a>
+			       
+	    <section ng-view>
+	    </section>
+	</div>
 }

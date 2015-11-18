@@ -29,6 +29,16 @@
 		<dir-pagination-controls on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 
 
-		<p>this is : {{results.items[selectedRow+numselectionbypage]}}</p>
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Selected Ressource</h3>
+  </div>
+  <div class="row panel-body">
+    <p class = "col-sm-8">this is : {{results.items[selectedRow+numselectionbypage].full_name}}</p>
+    <a href="#" class="btn btn-default pull-right">Analytics</a>
+  </div>
+</div>
+		
 
 </div>
