@@ -43,21 +43,35 @@ angular.module('routeAppControllers').controller('SearchController', function($s
 });
 
 
-angular.module('routeAppControllers').controller('AnalyticsController', function($scope,$routeParams,$http){
-	$scope.message = "this is the analyics";
-	$scope.input = $routeParams.input;
-	$scope.commits=[];
-    $scope.doGetCommitsFromRepo = function() {
-        var httpRequest = $http({
-            method : 'GET',
-            url : "/repositories/" + $scope.input,
-        }).success(function(data, status) {
-            $scope.commits = data;
-        }).error(function(arg) {
-            alert("error ");
-        });
-         
-    };
-	$scope.doGetCommitsFromRepo();
-});
+angular.module('routeAppControllers').controller('AnalyticsController',
+		function($scope, $routeParams, $http) {
+			$scope.input = $routeParams.input;
+			$scope.commits = [];
+			$scope.doGetCommitsFromRepo = function(callback) {
+				$http({
+					method : 'GET',
+					url : "/repositories/" + $scope.input,
+				}).success(function(data, status) {
+					$scope.commits = data;
+					$scope.CommitersCount = data.reduce(function(acc, curr) {
+						curr = curr.commit.committer.name;
+						if (typeof acc[curr] == 'undefined') {
+							acc[curr] = 1;
+						} else {
+							acc[curr] += 1;
+						}
+
+						return acc;
+					}, {});
+				}).error(function(arg) {
+					alert("error ");
+				});
+
+			};
+
+			
+			
+			
+			$scope.doGetCommitsFromRepo();
+		});
 

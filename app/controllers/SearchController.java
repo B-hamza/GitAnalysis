@@ -41,7 +41,6 @@ public class SearchController extends Controller {
     	GitApi gitApi = GitApi.prepareConnection();
     	SearchRepositories searchRepo = gitApi.searchRepositories();
     	JsonNode jsonListRepo = searchRepo.getRepositoryCommitsById(idRepo).page(1).PerPage(100).getElements();
-    	
     	return ok(jsonListRepo);
     }
     

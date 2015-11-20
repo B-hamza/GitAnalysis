@@ -3,14 +3,42 @@
 <section class="analytics">
     <h2>Page d'analyse</h2>
     <p>
-        {{ message }}  {{ input }}
+       	{{ input }}
         {{commits.length}}
-    </p>
+    </p><br>
+    <p>{{CommitersCount}}</p>
+
     
-    <ul ng-repeat="commit in commits">
+ <!--    <ul ng-repeat="commit in commits">
     	<li>{{commit.commit.committer.name}}</li>
     	<li>{{commit.commit.committer.email}}</li>
     	<li>{{commit.commit.committer.date}}</li>
-    </ul>
-    
+    </ul> -->
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+
 </section>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load("visualization", "1", {
+			packages : [ "corechart" ]
+		});
+		google.setOnLoadCallback(drawChart);
+		var data = google.visualization.arrayToDataTable([
+				[ 'Task', 'Hours per Day' ], [ 'Work', 11 ], [ 'Eat', 2 ],
+				[ 'Commute', 2 ], [ 'Watch TV', 2 ], [ 'Sleep', 7 ] ]);
+
+		var options = {
+			title : 'My Daily Activities'
+		};
+
+		var chart = new google.visualization.PieChart(document
+				.getElementById('piechart'));
+$(function() {
+console.log("test");});
+		chart.draw(data, options);
+		 console.log("It works!");
+	</script>
+	
+	
+	
