@@ -6,7 +6,3 @@ This file will be packaged with your application, when using `activator dist`.
 
 http://bootswatch.com/simplex/
 
-access_token=33170818b6ded9592b73f3a438981c17462bb66b  
-?client_id=9e42860abd74a5ac3a0d&client_secret=3a13bdf6e0f73ae4aaaad8b73c666daf90f3328c
-
-commits?order=desc&page=1&per_page=100
