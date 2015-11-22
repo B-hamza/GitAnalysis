@@ -31,7 +31,6 @@ public abstract class SearchUtils {
 	}
 
 	public SearchUtils q(String name) {
-		Logger.debug("q is " + name + " and url is " + this.url);
 		params.add(name);
 		return this;
 	}

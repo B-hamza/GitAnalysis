@@ -7,6 +7,13 @@ angular.module('routeApp',
 		// dépendances du "module"
 		['ngRoute', 'routeAppControllers', 'angularUtils.directives.dirPagination']);
 
+google.load('visualization', '1', {
+	  packages: ['corechart']
+	});
+
+google.setOnLoadCallback(function() {
+  angular.bootstrap(document.body, ['routeApp']);
+});
 
 // configuration du systèmes de routage
 
