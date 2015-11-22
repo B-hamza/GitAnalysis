@@ -1,6 +1,8 @@
 package controllers;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.inject.Inject;
 
@@ -24,18 +26,23 @@ public class SearchController extends Controller {
 	@Inject WSClient ws;
 	
     public Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(main.render("Your new application is ready."));
     }
     
     public Result SearchRepositoriesUsingInternApi(String name){
     	
     	GitApi gitApi = GitApi.prepareConnection();
     	SearchRepositories searchRepo = gitApi.searchRepositories();
-    	JsonNode jsonListRepo = searchRepo.q(name).page(1).PerPage(100).getElements();
-    	
-    	return ok(jsonListRepo.get("items"));
-    	
+		try {
+			JsonNode jsonListRepo;
+			jsonListRepo = searchRepo.q(URLEncoder.encode(name,"UTF-8")).page(1).PerPage(100).getElements();
+			return ok(jsonListRepo.get("items"));
+		} catch (UnsupportedEncodingException e) {
+			return badRequest();
+		}
     }
+    
+    
     
     public Result getCommitersFromRepo(String idRepo){
     	GitApi gitApi = GitApi.prepareConnection();

@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String)
 
 <!DOCTYPE html>
 
@@ -18,17 +18,29 @@
 	       type="text/javascript"></script>
 	    <script src="@routes.Assets.versioned("javascripts/main.js")"
 	       type="text/javascript"></script>
-	    <script src="@routes.Assets.versioned("javascripts/controllers.js")"
+	    <script src="@routes.Assets.versioned("javascripts/directives/directives.js")"
 	       type="text/javascript"></script>
-	       
-	       
-	     
+	    <script src="@routes.Assets.versioned("javascripts/services.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/controllers/controllers.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/controllers/searchController.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/controllers/analyticsController.js")"
+	       type="text/javascript"></script>
   
   </head>
   <body>
     <div >
       
-      @content
+       <div ng-controller = 'rootController'>
+	    <h1>Your search here</h1>
+		<input ng-model="input" ng-keyUp="enterTodo(input,$event)" autofocus>
+	 	<a href="#/search/{{input}}" class="btn btn-primary">Search</a>
+			       
+	    <section ng-view>
+	    </section>
+	</div>
     </div>
   </body>
 </html>
