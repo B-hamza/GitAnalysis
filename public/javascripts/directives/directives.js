@@ -12,17 +12,22 @@ angular.module('directives').directive('repoInfos', function(){
 angular.module('directives').directive('pieChart',function(){
 	return {
 		// Callback qui crée et affiche la datatable, et la piechart
-		scope:true,
-		link: function (attributes,$scope) {
+		restrict: 'E',
+		replace: true,
+        scope: {
+            ngModel: '='
+        },
+        template : '<div  style="width: 900px; height: 500px;"></div>',
+		link: function (scope, element,attrs) {
 			// Create the data table.
-			function drawChart() {
+			scope.$watch('ngModel', function() {
 						var data = new google.visualization.DataTable();
 						data.addColumn('string',
 						'committers');
 						data.addColumn('number',
 						'Number of committers');
 						
-						data.addRows(attributes.$parent.CommitersCount);
+						data.addRows(scope.ngModel);
 						
 						var options = {
 								title : 'My Daily Activities'
@@ -32,8 +37,27 @@ angular.module('directives').directive('pieChart',function(){
 								document.getElementById('piechart'));
 						
 						chart.draw(data, options);
-				};
-				drawChart();
+				},true);
+
+		}
+	};
+});
+
+
+angular.module('directives').directive('timeLine',function(){
+	return {
+		// Callback qui crée et affiche la datatable, et la piechart
+		restrict: 'E',
+		replace: true,
+        scope: {
+            ngModel: '='
+        },
+        template : '<div  style="width: 900px; height: 500px;"></div>',
+		link: function (scope, element,attrs) {
+			// Create the data table.
+			scope.$watch('ngModel', function() {
+						
+				},true);
 
 		}
 	};
