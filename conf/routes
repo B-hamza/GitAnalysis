@@ -8,7 +8,7 @@ GET     /                           controllers.SearchController.index()
 
 #GET		/searchTest/					controllers.Search.searchPublicRepositories(name:String)
 
-GET		/search/:term				controllers.SearchController.SearchRepositoriesUsingInternApi(term:String)
+GET		/search/:term				controllers.SearchController.SearchRepositoriesUsingInternApi(term:String,page: Integer ?= 1)
 
 GET		/repositories/:idRepo		controllers.SearchController.getCommitersFromRepo(idRepo:String)
 

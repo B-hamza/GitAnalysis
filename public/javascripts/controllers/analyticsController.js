@@ -2,11 +2,13 @@ angular.module('routeAppControllers').controller('AnalyticsController',
 				function($scope, $routeParams, $http) {
 					$scope.input = $routeParams.input;
 					$scope.itemPage = 10;
-					$scope.commits = [];
+					$scope.commits = null;
+					$scope.CommitersCount = [];
 					$scope.doGetCommitsFromRepo = function(callback) {
 					$http({
 						method : 'GET',
 						url : "/repositories/" + $scope.input,
+						async: false
 					}).success(
 					function(data, status) {
 						$scope.commits = data;
@@ -43,28 +45,7 @@ angular.module('routeAppControllers').controller('AnalyticsController',
 															committersCount[curr]);
 											return newObj;
 										})
-	
-					// Callback qui crée et affiche la datatable, et la piechart
-						function drawChart() {
-							// Create the data table.
-							var data = new google.visualization.DataTable();
-							data.addColumn('string',
-									'committers');
-							data.addColumn('number',
-									'Number of committers');
-							data.addRows($scope.CommitersCount);
-	
-							var options = {
-								title : 'My Daily Activities'
-							};
-	
-							var chart = new google.visualization.PieChart(
-									document.getElementById('piechart'));
-	
-							chart.draw(data, options);
-	
-						}
-						drawChart();
+						
 	
 					}).error(function(arg) {
 									alert("error ");

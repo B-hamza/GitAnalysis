@@ -13,6 +13,17 @@ angular.module('routeAppControllers').controller('SearchController', function($s
         });
     };
     
+    $scope.doSearchByPage = function(input,page,liste) {
+        var httpRequest = $http({
+            method : 'GET',
+            url : "/search/" + input+'?page='+page,
+        }).success(function(data, status) {
+        	$scope.results=liste.concat(data);
+        }).error(function(arg) {
+            alert("error ");
+        });
+    };
+    
     $scope.numselectionbypage=0;// pour la mise a jour du selectedRow lors de la pagination
     $scope.selectedRow = null;
     $scope.setClickedRow = function(index){  // mettre le selectedRow à la valeur d'index à chaque clique
@@ -49,7 +60,7 @@ angular.module('routeAppControllers').controller('SearchController', function($s
     $scope.pageChangeHandler = function(num) { 
     	$scope.numselectionbypage = (num-1)*$scope.itemPage;
     	if(num>($scope.results.length/10)/2){
-    		$scope.doSearch($scope.input,$scope.results);
+    		$scope.doSearchByPage($scope.input,2,$scope.results);
     	}
     };
 // chercher au chargement de la page

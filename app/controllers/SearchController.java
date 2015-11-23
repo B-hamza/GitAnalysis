@@ -29,13 +29,13 @@ public class SearchController extends Controller {
         return ok(main.render("Your new application is ready."));
     }
     
-    public Result SearchRepositoriesUsingInternApi(String name){
+    public Result SearchRepositoriesUsingInternApi(String name,int pageNumber){
     	
     	GitApi gitApi = GitApi.prepareConnection();
     	SearchRepositories searchRepo = gitApi.searchRepositories();
 		try {
 			JsonNode jsonListRepo;
-			jsonListRepo = searchRepo.q(URLEncoder.encode(name,"UTF-8")).page(1).PerPage(100).getElements();
+			jsonListRepo = searchRepo.q(URLEncoder.encode(name,"UTF-8")).page(pageNumber).PerPage(100).getElements();
 			return ok(jsonListRepo.get("items"));
 		} catch (UnsupportedEncodingException e) {
 			return badRequest();
