@@ -4,7 +4,7 @@
       
 	<h2>There are {{ results.length }} results</h2>
 
-	<div ng-show="results !=null && results.length==0" class="alert alert-dismissible alert-info">
+	<div ng-show="results !=null && results.length===0" class="alert alert-dismissible alert-info">
 		<button type="button" class="close" data-dismiss="alert">&close;</button>
 		<strong>!</strong> Sorry this repo, don't exist.
 	</div>
@@ -32,7 +32,7 @@
 		
 		<dir-pagination-controls ng-show="results.length>0" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 
-<repo-infos></repo-infos>
+<repo-infos id="reposInfos"></repo-infos>
 
 
 <!-- <div class="panel panel-success">

@@ -12,12 +12,20 @@ angular.module('routeAppControllers').controller('AnalyticsController',
 					}).success(
 					function(data, status) {
 						$scope.commits = data;
+					}).error(function(arg) {
+									alert("error ");
+								});
+
+					};
+
+					$scope.$watch('commits', function(){
 						/* somme le nombre de commit par
 						 *	committers rends => ObjectJson :
 						 *	{"committer":"n (nombre de
 						 *	commit)"}
 						 */
-						var committersCount = data
+						if($scope.commits!=null){
+						var committersCount = $scope.commits
 								.reduce(
 										function(acc, curr) {
 											curr = curr.commit.committer.name;
@@ -44,15 +52,11 @@ angular.module('routeAppControllers').controller('AnalyticsController',
 											newObj.push(curr,
 															committersCount[curr]);
 											return newObj;
-										})
+										});
+						}
 						
-	
-					}).error(function(arg) {
-									alert("error ");
-								});
-
-					};
-
+					})
+					
 					$scope.doGetCommitsFromRepo();
 				});
 

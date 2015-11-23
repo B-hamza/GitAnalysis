@@ -1,17 +1,14 @@
 
 <section class="analytics">
-    <h2>Page d'analyse</h2>
+
+	<h2>Page d'analyse</h2>
     <p>
        	{{ input }}
         {{commits.length}}
     </p><br>
     
- <!--    <ul ng-repeat="commit in commits">
-    	<li>{{commit.commit.committer.name}}</li>
-    	<li>{{commit.commit.committer.email}}</li>
-    	<li>{{commit.commit.committer.date}}</li>
-    </ul> -->
-    <div ng-show="commits !=null && commits.length==0" class="alert alert-dismissible alert-info">
+
+    <div ng-show="commits !=null && commits.length===0" class="alert alert-dismissible alert-info">
 		<button type="button" class="close" data-dismiss="alert">&close;</button>
 		<strong>!</strong> Sorry there is no committer on this repo.
 	</div>
@@ -36,9 +33,7 @@
 	</table>
 	<dir-pagination-controls "></dir-pagination-controls>
     
-    
-     
-    <pie-chart data-id="piechart" ng-model="CommitersCount" ></pie-chart>
+    <pie-chart id="piechart" ng-model="CommitersCount" ></pie-chart>
 
 </section>
 	

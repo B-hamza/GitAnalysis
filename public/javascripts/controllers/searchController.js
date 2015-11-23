@@ -43,7 +43,7 @@ angular.module('routeAppControllers').controller('SearchController', function($s
         var cell1 = row.insertCell(0);
         cell1.setAttribute("colspan",4);
         var cell2 = row.insertCell(1);
-        cell1.innerHTML = "<repo-infos></repo-infos>";
+        cell1.appendChild(document.getElementById('reposInfos'));
         cell2.innerHTML = "<a href=\"\#/analytics/"+$scope.results[$scope.selectedRow+$scope.numselectionbypage].id+"\""+" class=\"btn btn-default pull-right\">Analytics</a>"
     }
     
@@ -53,7 +53,7 @@ angular.module('routeAppControllers').controller('SearchController', function($s
     	 * div content contains description of repo and url 
     	 * div footer contains Forks na Stars
     	 */
-    	return "<repo-infos></repo-infos>";
+    	return document.getElementById('reposInfos');
     	
     }
     

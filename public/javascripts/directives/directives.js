@@ -4,7 +4,10 @@ angular.module('directives', []);
 angular.module('directives').directive('repoInfos', function(){
 	return{
 		restruct:'E',
-		templateUrl:'/assets/partials/repo-infos.html'
+		templateUrl:'/assets/partials/repo-infos.html',
+		link: function(scope,element,attrs){
+			// ajouter l'élement dans la selection de la ligne
+		}
 	};
 	
 });
