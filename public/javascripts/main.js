@@ -5,10 +5,10 @@
 
 angular.module('routeApp', 
 		// dépendances du "module"
-		['ngRoute', 'routeAppControllers',  'services' ,'angularUtils.directives.dirPagination']);
+		['ngRoute', 'routeAppControllers', 'directives', 'services', 'angularUtils.directives.dirPagination']);
 
 google.load('visualization', '1', {
-	  packages: ['corechart']
+	  packages: ['corechart',"timeline"]
 	});
 
 google.setOnLoadCallback(function() {

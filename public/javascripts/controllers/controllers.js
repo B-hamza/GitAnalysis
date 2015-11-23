@@ -1,7 +1,7 @@
 'use strict';
 // définition des contrôleurs
 
-angular.module('routeAppControllers', ['directives']);
+angular.module('routeAppControllers', []);
 
 angular.module('routeAppControllers').controller('rootController', function($scope,$routeParams,$location){
 	$scope.message = "this is the analyics";

@@ -26,7 +26,7 @@ public class SearchController extends Controller {
 	@Inject WSClient ws;
 	
     public Result index() {
-        return ok(main.render("Your new application is ready."));
+        return ok(main.render("Git Analyse"));
     }
     
     public Result SearchRepositoriesUsingInternApi(String name,int pageNumber){

@@ -6,7 +6,7 @@
        	{{ input }}
         {{commits.length}}
     </p><br>
-    
+    <a href="#home" target="_self">this is tabs</a>
 
     <div ng-show="commits !=null && commits.length===0" class="alert alert-dismissible alert-info">
 		<button type="button" class="close" data-dismiss="alert">&close;</button>
@@ -33,8 +33,11 @@
 	</table>
 	<dir-pagination-controls "></dir-pagination-controls>
     
-    <pie-chart id="piechart" ng-model="CommitersCount" ></pie-chart>
-
+    <div ng-show="commits.length>0">
+	    <pie-chart id="piechart" ng-model="CommitersCount" ></pie-chart>
+	
+		<time-line id="timeline" ng-model="CommitersCount"></time-line>
+	</div>
 </section>
 	
 	
