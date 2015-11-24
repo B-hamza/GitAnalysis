@@ -49,6 +49,9 @@ angular.module('directives').directive('pieChart',function(){
 		link: function (scope, element,attrs) {
 			// Create the data table.
 			scope.$watch('ngModel', function() {
+						if(scope.$parent.commits!=null){ // do not desplay until commits data is not empty
+							document.getElementById('charts').removeAttribute("hidden");
+						}
 						var data = new google.visualization.DataTable();
 						data.addColumn('string',
 						'committers');
@@ -58,13 +61,15 @@ angular.module('directives').directive('pieChart',function(){
 						data.addRows(scope.ngModel);
 						
 						var options = {
-								title : 'My Daily Activities'
+								title : 'The impact of committers'
 						};
 						
 						var chart = new google.visualization.PieChart(
 								document.getElementById('piechart'));
 						
 						chart.draw(data, options);
+						
+						
 				},true);
 
 		}

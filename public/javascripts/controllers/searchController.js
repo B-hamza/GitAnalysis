@@ -33,7 +33,6 @@ angular.module('routeAppControllers').controller('SearchController', function($s
     
     $scope.pageChangeHandler = function(num) { 
     	$scope.numselectionbypage = (num-1)*$scope.itemPage;
-    	
     	if(num>($scope.results.length/10)/2){
     		$scope.doSearchByPage($scope.input,2,$scope.results);
     	}
