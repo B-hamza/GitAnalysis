@@ -56,7 +56,7 @@ angular.module('directives').directive('pieChart',function(){
 						data.addColumn('string',
 						'committers');
 						data.addColumn('number',
-						'Number of committers');
+						'Number of commits');
 						
 						data.addRows(scope.ngModel);
 						
@@ -77,7 +77,49 @@ angular.module('directives').directive('pieChart',function(){
 });
 
 
-angular.module('directives').directive('timeLine',function(){
+angular.module('directives').directive('barChart',function(){
+	return {
+		restrict: 'E',
+		scope : {
+			ngModel: '='
+		},
+		template : '<div style="width: 900px; height: 300px;" > </div>',
+		link: function(scope,element,attrs){
+			   scope.$watch('ngModel', function() {
+				  // var data= google.visualization.DataTable();
+				      var data = new google.visualization.DataTable();
+						data.addColumn('string',
+						'committers');
+						data.addColumn('number',
+						'Number of commits');
+						
+						data.addRows(scope.ngModel);
+
+				      var view = new google.visualization.DataView(data);
+				      view.setColumns([0,1,
+				                       { calc: "stringify",
+				                         sourceColumn: 1,
+				                         type: "string",
+				                         role: "annotation"
+				                         }]);
+
+				      var options = {
+				        title: "Number of commits per user",
+				        width: 600,
+				        height: 400,
+				        bar: {groupWidth: "95%"},
+				        legend: { position: "none" },
+				      };
+				      var chart = new google.visualization.BarChart(document.getElementById("barchart"));
+				      chart.draw(view, options);
+				  });
+		}
+	}
+	
+});
+
+
+angular.module('directives').directive('timelineChart',function(){
 	return {
 		// Callback qui crée et affiche la datatable, et la piechart
 		restrict: 'E',
@@ -89,7 +131,7 @@ angular.module('directives').directive('timeLine',function(){
 		link: function (scope, element,attrs) {
 			// Create the data table.
 			scope.$watch('ngModel', function(){
-				  var container = document.getElementById('timeline');
+				  var container = document.getElementById('timelinechart');
 				  var chart = new google.visualization.Timeline(container);
 				  var dataTable = new google.visualization.DataTable();
 				  dataTable.addColumn({ type: 'string', id: 'Position' });
@@ -109,10 +151,10 @@ angular.module('directives').directive('timeLine',function(){
 				    [ 'Secretary of State', new Date(1795, 7, 20), new Date(1795, 7, 20)]
 				  ]);
 
-
 				  chart.draw(dataTable);
 				},true);
 
 		}
 	};
 });
+

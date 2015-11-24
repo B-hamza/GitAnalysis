@@ -49,10 +49,17 @@ angular.module('routeAppControllers').controller('AnalyticsController',
 								.map(
 										function(curr) {
 											var newObj = [];
-											newObj.push(curr,
-															committersCount[curr]);
+											newObj.push(curr,committersCount[curr]);
 											return newObj;
-										});
+										})
+								.sort(function (a, b) {// trier par nombre de commit
+								    if (a[1] > b[1])
+								        return 1;
+								      if (a[1] < b[1])
+								        return -1;
+								      // a doit être égale à b
+								      return 0;
+								  });;
 						}
 						
 					})

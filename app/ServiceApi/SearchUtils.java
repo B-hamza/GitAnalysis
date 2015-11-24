@@ -35,7 +35,7 @@ public abstract class SearchUtils {
 		return this;
 	}
 
-	public JsonNode getElements() {
+	public JsonNode getElementsJson() {
 
 		String result = "";
 		try {

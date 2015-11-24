@@ -1,5 +1,16 @@
 
+
 <section class="analytics">
+<div style="height: 305px">
+ 	<uib-carousel interval="myInterval" no-wrap="false">
+      <uib-slide ng-repeat="commit in commits" >
+        <div class="carousel-caption">
+          <h4>{{commit.commit.committer.name}} </h4>
+          <p>{{commit.commit.committer.email}}</p>
+        </div>
+      </uib-slide>
+    </uib-carousel>
+</div>
 
 	<h2>Page d'analyse</h2>
     <p>
@@ -32,12 +43,16 @@
 		</tbody>
 	</table>
 	<dir-pagination-controls "></dir-pagination-controls>
-    
+
+
     <div id="charts" hidden>
 	    <pie-chart id="piechart" ng-model="CommitersCount" ></pie-chart>
+		<bar-chart id="barchart" ng-model="CommitersCount"></bar-chart>
 	
-		<time-line id="timeline" ng-model="CommitersCount"></time-line>
+		<timeline-chart id="timelinechart" ng-model="CommitersCount"></timeline-chart>
+		
 	</div>
+   
 </section>
 	
 	

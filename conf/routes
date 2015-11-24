@@ -10,7 +10,7 @@ GET     /                           controllers.SearchController.index()
 
 GET		/search/:term				controllers.SearchController.SearchRepositoriesUsingInternApi(term:String,page: Integer ?= 1)
 
-GET		/repositories/:idRepo		controllers.SearchController.getCommitersFromRepo(idRepo:String)
+GET		/repositories/:idRepo		controllers.SearchController.getCommitsFromRepo(idRepo:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
