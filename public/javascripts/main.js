@@ -5,7 +5,7 @@
 
 angular.module('routeApp', 
 		// dépendances du "module"
-		['ngRoute', 'routeAppControllers', 'directives', 'services', 'angularUtils.directives.dirPagination']);
+		['ngRoute', 'routeAppControllers', 'directives', 'services', 'ui.bootstrap', 'angularUtils.directives.dirPagination']);
 
 google.load('visualization', '1', {
 	  packages: ['corechart',"timeline"]

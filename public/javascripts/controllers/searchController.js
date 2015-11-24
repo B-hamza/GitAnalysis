@@ -1,5 +1,6 @@
 angular.module('routeAppControllers').controller('SearchController', function($scope,$routeParams, $http) {
     $scope.results = null;
+    $scope.isSearching = true;
     $scope.itemPage = 10; // mettre la pagination à 10
     $scope.input = $routeParams.input;
     $scope.doSearch = function(input,liste) {
@@ -8,8 +9,10 @@ angular.module('routeAppControllers').controller('SearchController', function($s
             url : "/search/" + input,
         }).success(function(data, status) {
         	$scope.results=liste.concat(data);
+        	$scope.isSearching = false;
         }).error(function(arg) {
             alert("error ");
+            $scope.isSearching = false;
         });
     };
     
@@ -31,10 +34,11 @@ angular.module('routeAppControllers').controller('SearchController', function($s
     	
      }
     
+    var callPage = 1;
     $scope.pageChangeHandler = function(num) { 
     	$scope.numselectionbypage = (num-1)*$scope.itemPage;
     	if(num>($scope.results.length/10)/2){
-    		$scope.doSearchByPage($scope.input,2,$scope.results);
+    		$scope.doSearchByPage($scope.input,callPage++,$scope.results);
     	}
     };
 // chercher au chargement de la page

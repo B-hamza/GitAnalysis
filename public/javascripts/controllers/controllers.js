@@ -8,9 +8,12 @@ angular.module('routeAppControllers').controller('rootController', function($sco
 	$scope.input = $routeParams.input;
 	$scope.page = 1;
 	$scope.enterTodo = function(input,event){
-		if(event.keyCode ==13){ // ENTER_KEY
+		if((event.keyCode ===13 || event.type === "click") && $scope.input!==undefined && $scope.input!==""){ // ENTER_KEY
 			$location.path('/search/'+input);
 		}
 	}
+	
+	
+	
 });
 

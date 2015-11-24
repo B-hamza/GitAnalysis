@@ -45,7 +45,7 @@ angular.module('directives').directive('pieChart',function(){
         scope: {
             ngModel: '='
         },
-        template : '<div  style="width: 900px; height: 500px;"></div>',
+        template : '<div class="centered" style="width: 900px; height: 500px;"></div>',
 		link: function (scope, element,attrs) {
 			// Create the data table.
 			scope.$watch('ngModel', function() {
@@ -61,7 +61,9 @@ angular.module('directives').directive('pieChart',function(){
 						data.addRows(scope.ngModel);
 						
 						var options = {
-								title : 'The impact of committers'
+								title : 'The impact of committers',
+								width: 600,
+						        height: 400,
 						};
 						
 						var chart = new google.visualization.PieChart(
