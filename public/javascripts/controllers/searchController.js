@@ -1,29 +1,25 @@
-angular.module('routeAppControllers').controller('SearchController', function($scope,$routeParams, $http) {
+angular.module('routeAppControllers').controller('SearchController',['$scope','$routeParams','serviceRepositories', function($scope,$routeParams, serviceRepositories) {
     $scope.results = null;
     $scope.isSearching = true;
     $scope.itemPage = 10; // mettre la pagination à 10
     $scope.input = $routeParams.input;
+    $scope.error=null;
+    
     $scope.doSearch = function(input,liste) {
-        var httpRequest = $http({
-            method : 'GET',
-            url : "/search/" + input,
-        }).success(function(data, status) {
+    	serviceRepositories.getRepositories(input).success(function(data, status) {
         	$scope.results=liste.concat(data);
         	$scope.isSearching = false;
         }).error(function(arg) {
-            alert("error ");
             $scope.isSearching = false;
+            $scope.error = arg;
         });
     };
     
     $scope.doSearchByPage = function(input,page,liste) {
-        var httpRequest = $http({
-            method : 'GET',
-            url : "/search/" + input+'?page='+page,
-        }).success(function(data, status) {
+    	serviceRepositories.getRepositoriesPerPage(input,page).success(function(data, status) {
         	$scope.results=liste.concat(data);
         }).error(function(arg) {
-            alert("error ");
+            $scope.error = "Error failed to load page"+arg
         });
     };
     
@@ -43,4 +39,4 @@ angular.module('routeAppControllers').controller('SearchController', function($s
     };
 // chercher au chargement de la page
     $scope.doSearch($scope.input,[]);
-});
+}]);

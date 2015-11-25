@@ -45,7 +45,7 @@ angular.module('directives').directive('pieChart',function(){
         scope: {
             ngModel: '='
         },
-        template : '<div class="centered" style="width: 900px; height: 500px;"></div>',
+        template : '<div class="centered" style="width: 900px; height: 400px;"></div>',
 		link: function (scope, element,attrs) {
 			// Create the data table.
 			scope.$watch('ngModel', function() {

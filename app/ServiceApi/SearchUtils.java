@@ -35,7 +35,7 @@ public abstract class SearchUtils {
 		return this;
 	}
 
-	public JsonNode getElementsJson() {
+	public JsonNode getElementsJson() throws MalformedURLException, IOException {
 
 		String result = "";
 		try {
@@ -55,6 +55,7 @@ public abstract class SearchUtils {
 			conn.setRequestProperty("Accept", "application/json");
 
 			if (conn.getResponseCode() != 200) {
+				Logger.error("Failed : HTTP error code : "+ conn.getResponseCode());
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ conn.getResponseCode());
 			}
@@ -71,13 +72,12 @@ public abstract class SearchUtils {
 			conn.disconnect();
 
 		} catch (MalformedURLException e) {
-
-			e.printStackTrace();
+			Logger.error(e.getMessage(),e);
+			throw new MalformedURLException();
 
 		} catch (IOException e) {
-
-			e.printStackTrace();
-
+			Logger.error(e.getMessage(),e);
+			throw new IOException();
 		}
 		return Json.parse(result);
 

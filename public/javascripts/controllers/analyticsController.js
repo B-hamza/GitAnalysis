@@ -1,16 +1,12 @@
-angular.module('routeAppControllers').controller('AnalyticsController',
-				function($scope, $routeParams, $http) {
+angular.module('routeAppControllers').controller('AnalyticsController',['$scope','$routeParams','serviceRepositories',
+				function($scope, $routeParams, serviceRepositories) {
 					$scope.input = $routeParams.input;
 					$scope.itemPage = 10;
 					$scope.commits = null;
 					$scope.CommitersCount = [];
-					$scope.doGetCommitsFromRepo = function(callback) {
-					$http({
-						method : 'GET',
-						url : "/repositories/" + $scope.input,
-						async: false
-					}).success(
-					function(data, status) {
+					$scope.doGetCommitsFromRepo = function() {
+					serviceRepositories.getCommitsFromRepo($scope.input).success(
+							function(data, status) {
 						$scope.commits = data;
 					}).error(function(arg) {
 									alert("error ");
@@ -65,5 +61,5 @@ angular.module('routeAppControllers').controller('AnalyticsController',
 					})
 					
 					$scope.doGetCommitsFromRepo();
-				});
+				}]);
 

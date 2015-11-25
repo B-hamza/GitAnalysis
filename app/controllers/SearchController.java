@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.net.URLEncoder;
 
 import javax.inject.Inject;
@@ -38,17 +39,29 @@ public class SearchController extends Controller {
 			jsonListRepo = searchRepo.q(URLEncoder.encode(name,"UTF-8")).page(pageNumber).PerPage(100).getElementsJson();
 			return ok(jsonListRepo.get("items"));
 		} catch (UnsupportedEncodingException e) {
-			return badRequest();
+			return badRequest("Bad request, see input forma : "+name);
+		} catch (MalformedURLException e) {
+			return badRequest("Bad request, Error (400)");
+		} catch (IOException e){
+			return internalServerError("Failed to load Page, Internal Server Error (500)");
 		}
     }
     
     
     
     public Result getCommitsFromRepo(String idRepo){
-    	GitApi gitApi = GitApi.prepareConnection();
-    	SearchRepositories searchRepo = gitApi.searchRepositories();
-    	JsonNode jsonListRepo = searchRepo.getRepositoryCommitsById(idRepo).page(1).PerPage(100).getElementsJson();
-    	return ok(jsonListRepo);
+    	try{
+	    	GitApi gitApi = GitApi.prepareConnection();
+	    	SearchRepositories searchRepo = gitApi.searchRepositories();
+	    	JsonNode jsonListRepo = searchRepo.getRepositoryCommitsById(idRepo).page(1).PerPage(100).getElementsJson();
+	    	return ok(jsonListRepo);
+    	}catch (UnsupportedEncodingException e) {
+			return badRequest();
+		} catch (MalformedURLException e) {
+			return badRequest("Bad request Error (400)");
+		} catch (IOException e){
+			return internalServerError("Failed to load Page Internal Server Error (500)");
+		}
     }
     
     
@@ -59,27 +72,6 @@ public class SearchController extends Controller {
     	});
     	return jsonPromise;
 
-    }
-    
-    public Result SearchUsingThirdPartApi(String term){
-    	
-    	try {
-			GitHub github = GitHub.connect();
-			GHRepositorySearchBuilder repos = github.searchRepositories().q("tetris");
-			int i = 0;
-			//repos.list().forEach((repositoy) -> System.out.println("Content: "+(i+1)+ " "+ repositoy));
-
-			for(GHRepository repo : repos.list()){
-				System.out.println("content : "+i+" "+repo);
-				i++;
-			}
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	return ok ();
     }
     
     
