@@ -26,7 +26,7 @@ angular.module('services', []).factory('serviceRepositories',
 			serviceRepositories.getCommitsFromRepo = function(input) {
 				return $http({
 					method : 'GET',
-					url : "/repositories/" + input,
+					url : "/repositories/"+input+"/commits",
 				})
 			}
 

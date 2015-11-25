@@ -5,11 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URLEncoder;
 
-import javax.inject.Inject;
-
-import org.kohsuke.github.GHRepository;
-import org.kohsuke.github.GHRepositorySearchBuilder;
-import org.kohsuke.github.GitHub;
 
 import ServiceApi.GitApi;
 import ServiceApi.SearchRepositories;
@@ -17,15 +12,12 @@ import ServiceApi.SearchRepositories;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import play.Logger;
-import play.libs.ws.*;
 import play.libs.F.Promise;
 import play.mvc.*;
 import views.html.*;
 
 public class SearchController extends Controller {
 
-	@Inject WSClient ws;
-	
     public Result index() {
         return ok(main.render("Git Analyse"));
     }
@@ -65,11 +57,15 @@ public class SearchController extends Controller {
     }
     
     
-    public Promise<Result> searchUsingPromise(String term){
+    public static Promise<Result> searchUsingPromise(String term){
     	Logger.debug("call the service search ");
-    	Promise<Result> jsonPromise = ws.url("https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc").get().map(response -> {
+    	GitApi gitApi = GitApi.prepareConnection();
+    	SearchRepositories searchRepo = gitApi.searchRepositories();
+    	Promise<Result> jsonPromise = searchRepo.getRepositoryCommitsById(term).page(1).PerPage(100)
+    			.getElementsPromise()
+    			.map(response -> {
     	    return ok(response.asJson());
-    	});
+    			});
     	return jsonPromise;
 
     }

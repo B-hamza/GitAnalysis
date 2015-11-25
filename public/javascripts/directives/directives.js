@@ -152,11 +152,28 @@ angular.module('directives').directive('timelineChart',function(){
 				    [ 'Secretary of State', new Date(1794, 0, 2), new Date(1794, 0, 2)],
 				    [ 'Secretary of State', new Date(1795, 7, 20), new Date(1795, 7, 20)]
 				  ]);
+				  
+				  var options = {
+					        title: "timeline of commits",
+					        width: 500,
+					        height: 200,
+					      };
 
-				  chart.draw(dataTable);
+				  chart.draw(dataTable,options);
 				},true);
-
 		}
 	};
 });
 
+
+angular.module('directives').directive('timeline',function(){
+	return {
+		// Callback qui crée et affiche la datatable, et la piechart
+		restrict: 'E',
+		replace: true,
+        templateUrl : '/assets/partials/timeline.html',
+		link: function (scope, element,attrs) {
+			// Create the data table.
+		}
+	};
+});

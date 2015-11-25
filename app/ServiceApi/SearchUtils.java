@@ -9,10 +9,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.fasterxml.jackson.databind.JsonNode;
 
 import play.Logger;
 import play.libs.Json;
+import play.libs.F.Promise;
+import play.libs.ws.WSClient;
+import play.libs.ws.WSResponse;
 import play.mvc.Result;
 
 public abstract class SearchUtils {
@@ -81,6 +86,12 @@ public abstract class SearchUtils {
 		}
 		return Json.parse(result);
 
+	}
+	
+	@Inject WSClient ws;
+	public Promise<WSResponse> getElementsPromise(){
+		Promise<WSResponse> promise = ws.url("https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc").get();
+		return promise;
 	}
 
 }

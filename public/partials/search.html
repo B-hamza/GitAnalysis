@@ -8,13 +8,13 @@
 	</div>
       
 
-	<div ng-show="results !=null && results.length===0" class="alert alert-dismissible alert-info">
-		<button type="button" class="close" data-dismiss="alert">&close;</button>
+	<div ng-show="results !=null && results.length===0" class="alert alert-dismissible alert-info ">
+		<button type="button" class="close" data-dismiss="alert">x</button>
 		<strong>!</strong> Sorry this repo, don't exist.
 	</div>
 	
 	<div ng-show="error != null" class="alert alert-dismissible alert-danger">
-		<button type="button" class="close" data-dismiss="alert">&close;</button>
+		<button type="button" class="close" data-dismiss="alert" ng>x</button>
 		<strong>!</strong> {{error}}
 	</div>
 

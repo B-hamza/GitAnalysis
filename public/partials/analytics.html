@@ -3,12 +3,7 @@
 <section class="analytics">
   <uib-tabset>
     <uib-tab heading="committers">
-	<h2>Page d'analyse</h2>
-    <p>
-       	{{ input }}
-        {{commits.length}}
-    </p><br>
-    <a href="#home" target="_self">this is tabs</a>
+	
 
     <div ng-show="commits !=null && commits.length===0" class="alert alert-dismissible alert-info">
 		<button type="button" class="close" data-dismiss="alert">&close;</button>
@@ -33,7 +28,7 @@
 		</tr>
 		</tbody>
 	</table>
-	<dir-pagination-controls "></dir-pagination-controls>
+	<dir-pagination-controls ng-show="commits.length>0"></dir-pagination-controls>
 </uib-tab>
 
 <uib-tab heading="Analytics">
@@ -52,6 +47,10 @@
 		
 	</div>
  </uib-tab>  
+ 
+ <uib-tab heading="timeline">
+ 	<timeline id="timeline"></timeline>
+ </uib-tab>
   </uib-tabset>   
 </section>
 	
