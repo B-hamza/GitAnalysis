@@ -4,18 +4,18 @@ This is an applications for git analysis
 The applications is developed with Java using PlayFramework, and AngularJS
 the main concept is to search for repositories and by choosing one of the repo you can see a list and the impact of commiters on the repo.
 
-the applications was developed for a Homework porpose ! 
-And it was also to learn and make in practice learning AngularJS, and eventually PlayFramework.
+the applications was developed for a Homework purpose ! 
+And it was also to learn and make in practice learning AngularJS, and eventually PlayFramework and heroku.
  
 Adding angular on top of play framework is just as script tag in HTML, there is other clean ways to do it see "webJars" that can be added
 in build.sbt
 
-the Frontend part is in public folder where you can find a structure of angularJs which is not necessary but it's by choice to decompose in modules
-to structure the project and to be readable and clean work.
+the Frontend part is in public folder, where you can find a structure of angularJs, which is not necessary but it's by choice to decompose in modules,
+structure the project and to be readable and clean work.
 
-the backend developement is on top of playframework with java where you can find two way search : 
-the synchronous and asynchronous controller responible of repo search the one used is the synchronous.
-the idea of the architecture to compose the url with an API, called GitApi is comming from learning many api devs (open source projects), the one that i like is the restfb.
+the backend developement is on top of playframework with java, where you can find two way search : 
+the synchronous and asynchronous controller responsible of repo search, the one used is the synchronous.
+the idea of the architecture to compose the url with an API, called GitApi is coming from learning many api devs (open source projects), the one that i like is the restfb.
 
-
+the app was deployed on Heroku
 

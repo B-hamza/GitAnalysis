@@ -4,6 +4,7 @@ angular.module('routeAppControllers').controller('AnalyticsController',['$scope'
 					$scope.itemPage = 10;
 					$scope.commits = null;
 					$scope.CommitersCount = [];
+					$scope.shortlistcommiters = [];
 					$scope.doGetCommitsFromRepo = function() {
 					serviceRepositories.getCommitsFromRepo($scope.input).success(
 							function(data, status) {
@@ -55,7 +56,14 @@ angular.module('routeAppControllers').controller('AnalyticsController',['$scope'
 								        return -1;
 								      // a doit être égale à b
 								      return 0;
-								  });;
+								  });
+						
+						$scope.shortlistcommiters = $scope.commits.map(function(curr){
+							var newObj=[];
+							newObj.push(curr.commit.committer.name, new Date(curr.commit.committer.date), new Date(curr.commit.committer.date));
+							return newObj;
+						});
+						
 						}
 						
 					})

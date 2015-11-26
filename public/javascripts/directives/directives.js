@@ -136,22 +136,10 @@ angular.module('directives').directive('timelineChart',function(){
 				  var container = document.getElementById('timelinechart');
 				  var chart = new google.visualization.Timeline(container);
 				  var dataTable = new google.visualization.DataTable();
-				  dataTable.addColumn({ type: 'string', id: 'Position' });
+				  dataTable.addColumn({ type: 'string', id: 'Name' });
 				  dataTable.addColumn({ type: 'date', id: 'Start' });
 				  dataTable.addColumn({ type: 'date', id: 'End' });
-				  dataTable.addRows([
-				    [ 'President',  new Date(1789, 3, 30), new Date(1789, 3, 30) ],
-				    [ 'President',  new Date(1797, 2, 4), new Date(1797, 2, 4) ],
-				    [ 'President',  new Date(1801, 2, 4), new Date(1801, 2, 4) ],
-				    [ 'Vice President',  new Date(1789, 3, 21), new Date(1789, 3, 21)],
-				    [ 'Vice President',  new Date(1797, 2, 4), new Date(1797, 2, 4)],
-				    [ 'Vice President',  new Date(1801, 2, 4), new Date(1801, 2, 4)],
-				    [ 'Vice President',  new Date(1805, 2, 4), new Date(1805, 2, 4)],
-				    [ 'Secretary of State',  new Date(1789, 8, 25), new Date(1789, 8, 25)],
-				    [ 'Secretary of State', new Date(1790, 2, 22), new Date(1790, 2, 22)],
-				    [ 'Secretary of State', new Date(1794, 0, 2), new Date(1794, 0, 2)],
-				    [ 'Secretary of State', new Date(1795, 7, 20), new Date(1795, 7, 20)]
-				  ]);
+				  dataTable.addRows(scope.ngModel);
 				  
 				  var options = {
 					        title: "timeline of commits",
@@ -174,6 +162,39 @@ angular.module('directives').directive('timeline',function(){
         templateUrl : '/assets/partials/timeline.html',
 		link: function (scope, element,attrs) {
 			// Create the data table.
+			scope.$watch('commits', function(){
+				if(scope.commits!=null){
+					var i =0;var j=10;
+					scope.disableNewButton = true;
+					if(j<scope.commits.length){
+						scope.disableOldButton = false;
+					}else{
+						scope.disableOldButton = true;
+					}
+				scope.commitsShowIn = scope.commits.slice(i,j);
+				scope.newer = function(){
+					console.log("this is new");
+					if(i>0 && j>10){
+						i=i-10; j=j-10;
+						scope.commitsShowIn = scope.commits.slice(i,j);
+						scope.disableOldButton = false;
+					}else{
+						scope.disableNewButton = true;
+					}
+				}
+				scope.older = function(){
+					console.log("this is old");
+					if(j<scope.commits.length){
+						i=i+10;j=j+10;
+						scope.commitsShowIn = scope.commits.slice(i,j);
+						scope.disableNewButton = false;
+					}else{
+						scope.disableOldButton = true;
+					}
+				}
+				}
+			});
 		}
+
 	};
 });
