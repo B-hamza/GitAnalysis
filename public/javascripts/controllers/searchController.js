@@ -1,4 +1,4 @@
-angular.module('routeAppControllers').controller('SearchController',['$scope','$routeParams','serviceRepositories', function($scope,$routeParams, serviceRepositories) {
+angular.module('routeAppControllers').controller('SearchController',function($scope,$routeParams, serviceRepositories) {
     $scope.results = null;
     $scope.isSearching = true;
     $scope.itemPage = 10; // mettre la pagination à 10
@@ -19,7 +19,7 @@ angular.module('routeAppControllers').controller('SearchController',['$scope','$
     	serviceRepositories.getRepositoriesPerPage(input,page).success(function(data, status) {
         	$scope.results=liste.concat(data);
         }).error(function(arg) {
-            $scope.error = "Error failed to load page"+arg
+            $scope.error = arg
         });
     };
     
@@ -39,4 +39,4 @@ angular.module('routeAppControllers').controller('SearchController',['$scope','$
     };
 // chercher au chargement de la page
     $scope.doSearch($scope.input,[]);
-}]);
+});

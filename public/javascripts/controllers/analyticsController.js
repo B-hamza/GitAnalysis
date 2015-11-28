@@ -5,12 +5,17 @@ angular.module('routeAppControllers').controller('AnalyticsController',['$scope'
 					$scope.commits = null;
 					$scope.CommitersCount = [];
 					$scope.shortlistcommiters = [];
+					$scope.error=null;
+					$scope.isSearching = true;
+					
 					$scope.doGetCommitsFromRepo = function() {
 					serviceRepositories.getCommitsFromRepo($scope.input).success(
 							function(data, status) {
 						$scope.commits = data;
+						$scope.isSearching = false;
 					}).error(function(arg) {
-									alert("error ");
+									$scope.isSearching = false;
+									$scope.error = arg;
 								});
 
 					};

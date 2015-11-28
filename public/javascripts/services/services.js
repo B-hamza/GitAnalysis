@@ -3,8 +3,8 @@
 
 angular.module('services',[]);
 
-angular.module('services', []).factory('serviceRepositories',
-		[ '$http', function($http) {
+angular.module('services').factory('serviceRepositories',
+		  function($http) {
 
 			var serviceRepositories = {};
 
@@ -32,4 +32,11 @@ angular.module('services', []).factory('serviceRepositories',
 
 			return serviceRepositories;
 
-		} ])
+});
+
+
+angular.module('services').factory('serviceError',function(){
+	var errorHandler={};
+	return errorHandler;
+});
+

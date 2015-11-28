@@ -2,11 +2,14 @@ package models;
 
 public class Repository extends GlobalObject {
 
-	 	private String description, homepage, name, full_name;
-	    private String html_url;    // this is the UI
+	 	private String description;
+	 	private String homepage;
+	 	private String name;
+	 	private String full_name;
+	    private String html_url; 
 	    private String git_url;
-	    private User owner;   // not fully populated. beware.
-	    
+	    private String commits_url;
+	    private User owner;
 	    
 	    /*
 		 * methods :
@@ -59,6 +62,12 @@ public class Repository extends GlobalObject {
 		}
 		public void setOwner(User owner) {
 			this.owner = owner;
+		}
+		public String getCommits_url() {
+			return commits_url;
+		}
+		public void setCommits_url(String commits_url) {
+			this.commits_url = commits_url;
 		}
 	
 	    

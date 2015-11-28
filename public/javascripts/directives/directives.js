@@ -4,8 +4,7 @@ angular.module('directives', []);
 angular.module('directives').directive('repoInfos', function(){
 	return{
 		restruct:'E',
-
-		templateUrl:'/assets/partials/repo-infos.html',
+		templateUrl:'/assets/javascripts/directives/html/repoinfos.html',
 		link: function(scope,element,attrs){
 			// ajouter l'élement dans la selection de la ligne
 			scope.$watch('selectedRow', function(){
@@ -120,6 +119,51 @@ angular.module('directives').directive('barChart',function(){
 	
 });
 
+angular.module('directives').directive('timeline',function(){
+	return {
+		// Callback qui crée et affiche la datatable, et la piechart
+		restrict: 'E',
+		replace: true,
+        templateUrl : '/assets/javascripts/directives/html/timeline.html',
+		link: function (scope, element,attrs) {
+			// Create the data table.
+			scope.$watch('commits', function(){
+				if(scope.commits!=null){
+					scope.current = 0;
+					scope.itemsPerPage = 10;
+					scope.disableNewButton = true;
+					scope.disableOldButton = scope.current<(scope.commits.length/10) ? false:true;
+				scope.newer = function(){
+					console.log("this is new current : "+scope.current);
+					if(scope.current>0){
+						scope.current--;
+						scope.disableOldButton = false;
+					}else{
+						scope.disableNewButton = true;
+					}
+				}
+				scope.older = function(){
+					console.log("this is old current : "+scope.current);
+					if(scope.current<(scope.commits.length/10)-1){
+						scope.current++;
+						scope.disableNewButton = false;
+					}else{
+						scope.disableOldButton = true;
+					}
+				}
+				}
+			});
+		}
+
+	};
+}).filter('visual', function() {
+	  return function(input, start) {
+		  if(!input){ return false;}
+		    start = parseInt(start, 10);
+		    return input.slice(start);
+		  };
+});
+
 
 angular.module('directives').directive('timelineChart',function(){
 	return {
@@ -150,51 +194,5 @@ angular.module('directives').directive('timelineChart',function(){
 				  chart.draw(dataTable,options);
 				},true);
 		}
-	};
-});
-
-
-angular.module('directives').directive('timeline',function(){
-	return {
-		// Callback qui crée et affiche la datatable, et la piechart
-		restrict: 'E',
-		replace: true,
-        templateUrl : '/assets/partials/timeline.html',
-		link: function (scope, element,attrs) {
-			// Create the data table.
-			scope.$watch('commits', function(){
-				if(scope.commits!=null){
-					var i =0;var j=10;
-					scope.disableNewButton = true;
-					if(j<scope.commits.length){
-						scope.disableOldButton = false;
-					}else{
-						scope.disableOldButton = true;
-					}
-				scope.commitsShowIn = scope.commits.slice(i,j);
-				scope.newer = function(){
-					console.log("this is new");
-					if(i>0 && j>10){
-						i=i-10; j=j-10;
-						scope.commitsShowIn = scope.commits.slice(i,j);
-						scope.disableOldButton = false;
-					}else{
-						scope.disableNewButton = true;
-					}
-				}
-				scope.older = function(){
-					console.log("this is old");
-					if(j<scope.commits.length){
-						i=i+10;j=j+10;
-						scope.commitsShowIn = scope.commits.slice(i,j);
-						scope.disableNewButton = false;
-					}else{
-						scope.disableOldButton = true;
-					}
-				}
-				}
-			});
-		}
-
 	};
 });

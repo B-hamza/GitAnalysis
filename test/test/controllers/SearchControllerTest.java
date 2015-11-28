@@ -1,3 +1,4 @@
+package test.controllers;
 import org.junit.*;
 
 import controllers.SearchController;

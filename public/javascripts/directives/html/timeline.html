@@ -2,10 +2,11 @@
  {{commits.length}}
     
     <uib-accordion close-others="oneAtATime">
-    	 <uib-accordion-group ng-repeat = "commit in commitsShowIn" heading="{{commit.commit.committer.date}} by {{commit.commit.committer.name}} " >
+    	 <uib-accordion-group ng-repeat = "commit in commits | visual : current* itemsPerPage| limitTo :itemsPerPage " heading="{{commit.commit.committer.date}} by {{commit.commit.committer.name}} " >
     	 	<img ng-src="{{commit.author.avatar_url}}" width=32 height=32> {{commit.commit.message}}
     	 </uib-accordion-group>
-    	 <div>
+    	 
+    	 <div class="text-center">
     	 	<button ng-disabled="disableNewButton" type="button" class="btn btn-default" ng-click="newer()">newer</button>
     	 	<button ng-disabled="disableOldButton" type="button" class="btn btn-default" ng-click="older()">older</button>
     	 </div>
