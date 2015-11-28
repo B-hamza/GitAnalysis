@@ -69,7 +69,15 @@ public class Repository extends GlobalObject {
 		public void setCommits_url(String commits_url) {
 			this.commits_url = commits_url;
 		}
+		
+		@Override
+		public String toString() {
+			return "Repository [id="+this.getId()+ "description=" + description + ", homepage="
+					+ homepage + ", name=" + name + ", full_name=" + full_name
+					+ ", html_url=" + html_url + ", git_url=" + git_url
+					+ ", commits_url=" + commits_url + ", owner=" + owner + "]";
+		}
 	
-	    
+	   
 	
 }

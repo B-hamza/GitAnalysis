@@ -61,7 +61,7 @@ public class SearchController extends Controller {
     	Logger.debug("call the service search ");
     	GitApi gitApi = GitApi.prepareConnection();
     	SearchRepositories searchRepo = gitApi.searchRepositories();
-    	Promise<Result> jsonPromise = searchRepo.getRepositoryCommitsById(term).page(1).PerPage(100)
+    	Promise<Result> jsonPromise = searchRepo.q(term).page(1).PerPage(100)
     			.getElementsPromise()
     			.map(response -> {
     	    return ok(response.asJson());

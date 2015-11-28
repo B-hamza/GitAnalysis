@@ -2,10 +2,10 @@ package models;
 
 public class User extends GlobalObject{
 
-	private String avatarUrl;
-	private String gravatUrl;
+	private String avatar_url;
+	private String gravatar_url;
 	private String blog;
-	private String htmlUrl;
+	private String html_url;
 	private String location;
 	private String name;
 	private String login;
@@ -26,16 +26,16 @@ public class User extends GlobalObject{
 	
 	
 	public String getAvatarUrl() {
-		return avatarUrl;
+		return avatar_url;
 	}
 	public void setAvatarUrl(String avatarUrl) {
-		this.avatarUrl = avatarUrl;
+		this.avatar_url = avatarUrl;
 	}
 	public String getGravatUrl() {
-		return gravatUrl;
+		return gravatar_url;
 	}
 	public void setGravatUrl(String gravatUrl) {
-		this.gravatUrl = gravatUrl;
+		this.gravatar_url = gravatUrl;
 	}
 	public String getBlog() {
 		return blog;
@@ -44,10 +44,10 @@ public class User extends GlobalObject{
 		this.blog = blog;
 	}
 	public String getHtmlUrl() {
-		return htmlUrl;
+		return html_url;
 	}
 	public void setHtmlUrl(String htmlUrl) {
-		this.htmlUrl = htmlUrl;
+		this.html_url = htmlUrl;
 	}
 	public String getLocation() {
 		return location;
@@ -66,6 +66,13 @@ public class User extends GlobalObject{
 	}
 	public void setLogin(String login) {
 		this.login = login;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" +this.getId()+ "avatarUrl=" + avatar_url + ", gravatUrl=" + gravatar_url
+				+ ", blog=" + blog + ", htmlUrl=" + html_url + ", location="
+				+ location + ", name=" + name + ", login=" + login + "]";
 	}
 
 	
