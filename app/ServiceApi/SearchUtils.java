@@ -1,8 +1,8 @@
 package ServiceApi;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,14 +11,17 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import models.GlobalResults;
+import models.Repository;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import play.Logger;
-import play.libs.Json;
 import play.libs.F.Promise;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
-import play.mvc.Result;
 
 public abstract class SearchUtils {
 
@@ -42,9 +45,24 @@ public abstract class SearchUtils {
 
 	public JsonNode getElementsJson() throws MalformedURLException, IOException {
 
-		String result = "";
+		Logger.debug("Jsoncall of the searchUtils getElemntsJson ...");
+		JsonNode repo = this.getElemntsGeneric(JsonNode.class);
+		return repo;
+
+	}
+	
+	public GlobalResults<Repository> getElements() throws MalformedURLException, IOException {
+
+		Logger.debug("ObjectsRepo call of the searchUtils ...");
+		GlobalResults<Repository> repo = this.getElemntsGeneric(GlobalResults.class);
+		return repo;
+
+	}
+	
+	public<T> T getElemntsGeneric(Class<T> genericClass) throws MalformedURLException, IOException{
+		T repo ;
 		try {
-			Logger.debug("call of the searchUtils getElements ...");
+			Logger.debug("Genericcall of the searchUtils getElemntsGeneric ...");
 			String appendParam = "";
 			if (!params.isEmpty()) {
 				appendParam = "?" + params.get(0);
@@ -60,19 +78,11 @@ public abstract class SearchUtils {
 			conn.setRequestProperty("Accept", "application/json");
 
 			if (conn.getResponseCode() != 200) {
-				Logger.error("Failed : HTTP error code : "+ conn.getResponseCode());
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ conn.getResponseCode());
 			}
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					(conn.getInputStream())));
-
-			String output;
-
-			while ((output = br.readLine()) != null) {
-				result += output;
-			}
+			ObjectMapper objMapper = new ObjectMapper();
+			repo = objMapper.readValue(conn.getInputStream(), genericClass);
 
 			conn.disconnect();
 
@@ -84,9 +94,17 @@ public abstract class SearchUtils {
 			Logger.error(e.getMessage(),e);
 			throw new IOException();
 		}
-		return Json.parse(result);
-
+		return repo;
 	}
+//	public JsonNode getElementsJson() throws MalformedURLException, IOException{
+//		return Json.parse(this.getElementsResult().toString());
+//	}
+	
+//	public GlobalResults<Repository> getElements(){
+//		ObjectMapper objMapper = new ObjectMapper();
+//		objMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//		GlobalResults<Repository> repo = objMapper.readValue(this.getElementsJson()., GlobalResults.class);
+//	}
 	
 	@Inject WSClient ws;
 	public Promise<WSResponse> getElementsPromise(){
