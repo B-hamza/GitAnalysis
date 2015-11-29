@@ -22,14 +22,18 @@ public class SearchController extends Controller {
         return ok(main.render("Git Analyse"));
     }
     
+    /**
+     * @param name
+     * @param pageNumber
+     * @return
+     */
     public Result SearchRepositoriesUsingInternApi(String name,int pageNumber){
     	
     	GitApi gitApi = GitApi.prepareConnection();
     	SearchRepositories searchRepo = gitApi.searchRepositories();
 		try {
-			JsonNode jsonListRepo;
-			jsonListRepo = searchRepo.q(URLEncoder.encode(name,"UTF-8")).page(pageNumber).PerPage(100).getElementsJson();
-			return ok(jsonListRepo.get("items"));
+			JsonNode jsonListRepo = searchRepo.q(URLEncoder.encode(name,"UTF-8")).page(pageNumber).PerPage(100).getElementsJson();
+			return ok(jsonListRepo);
 		} catch (UnsupportedEncodingException e) {
 			return badRequest("Bad request, see input forma : "+name);
 		} catch (MalformedURLException e) {
@@ -41,6 +45,10 @@ public class SearchController extends Controller {
     
     
     
+    /**
+     * @param idRepo
+     * @return
+     */
     public Result getCommitsFromRepo(String idRepo){
     	try{
 	    	GitApi gitApi = GitApi.prepareConnection();
@@ -57,6 +65,10 @@ public class SearchController extends Controller {
     }
     
     
+    /**
+     * @param term
+     * @return
+     */
     public static Promise<Result> searchUsingPromise(String term){
     	Logger.debug("call the service search ");
     	GitApi gitApi = GitApi.prepareConnection();

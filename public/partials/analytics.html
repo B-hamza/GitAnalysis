@@ -25,17 +25,17 @@
 		<thead>
 			<tr>
 				<th>#</th>
+				<th>Login</th>
 				<th>Name</th>
 				<th>Email</th>
-				<th>Date of commits</th>
 			</tr>
 		</thead>
-		<tr dir-paginate="commit in commits | itemsPerPage: itemPage"
+		<tr dir-paginate="commit in commits | ListUsers | itemsPerPage: itemPage "
 			class="active">
 			<td>{{index}}</td>
-			<td>{{commit.commit.committer.name}}</td>
-			<td>{{commit.commit.committer.email}}</td>
-			<td>{{commit.commit.committer.date}}</td>
+			<td>{{commit.author.login}}</td>
+			<td>{{commit.commit.author.name}}</td>
+			<td>{{commit.commit.author.email}}</td>
 		</tr>
 		</tbody>
 	</table>
