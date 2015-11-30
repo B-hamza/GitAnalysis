@@ -30,7 +30,7 @@ angular.module('routeAppControllers').controller('AnalyticsController',['$scope'
 						var committersCount = $scope.commits
 								.reduce(
 										function(acc, curr) {
-											curr = curr.committer.login;
+											curr = curr.commit.committer.name;
 											if (typeof acc[curr] == 'undefined') {
 												acc[curr] = 1;
 											} else {
@@ -79,9 +79,9 @@ angular.module('routeAppControllers').controller('AnalyticsController',['$scope'
 		var list = [];
 		if(!input){return false;}
 		input.forEach(function(elmnt,index,array){
-			if(list.indexOf(elmnt.author.id)<0){
+			if(list.indexOf(elmnt.commit.committer.name)<0){
 				out.push(elmnt);
-				list.push(elmnt.author.id);
+				list.push(elmnt.commit.author.name);
 			}
 		});
 		return out;
