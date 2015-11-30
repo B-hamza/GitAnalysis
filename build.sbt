@@ -7,10 +7,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
-  javaJdbc,
   cache,
-  javaWs,
-  "org.kohsuke" % "github-api" % "1.70"
+  javaWs
 )
 
 resolvers += Resolver.typesafeRepo("releases")
