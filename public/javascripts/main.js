@@ -16,7 +16,6 @@ google.setOnLoadCallback(function() {
 });
 
 // configuration du systèmes de routage
-
 angular.module('routeApp').config([ '$routeProvider', function($routeProvider) {
 
 	// Système de routage

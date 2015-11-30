@@ -41,7 +41,7 @@ public abstract class SearchUtils {
 		this.url = api.globalUrl;
 	}
 
-	public SearchUtils q(String name) {
+	public SearchUtils param(String name) {
 		params.add(name);
 		return this;
 	}

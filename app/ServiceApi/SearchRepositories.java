@@ -18,17 +18,17 @@ public class SearchRepositories extends SearchUtils {
 	}
 	
 	public SearchRepositories q(String param){
-		super.q("q="+param);
+		super.param("q="+param);
 		return this;
 	}
 	
 	public SearchRepositories page(int numberPage){
-		super.q("page="+numberPage);
+		super.param("page="+numberPage);
 		return this;
 	}
 	
 	public SearchRepositories PerPage(int numberPage){
-		super.q("per_page="+numberPage);
+		super.param("per_page="+numberPage);
 		return this;
 	}
 	

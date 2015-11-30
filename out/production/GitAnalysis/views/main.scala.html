@@ -1,0 +1,54 @@
+@(title: String)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+	    <title>@title</title>
+	    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/base.css")">
+	    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/app.css")">
+	    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css")">
+  </head>
+  <body>
+   
+    <div >
+       <div ng-controller = 'rootController'>
+       	 	<div id="searchPanel" class="text-center">
+			    <h1>Your search here</h1>
+				<input ng-model="input" ng-keyUp="enterTodo(input,$event)" placeholder="Search Git Repositories" required autofocus>
+			 	<a href="" ng-click="enterTodo(input,$event)" class="btn btn-primary">Search</a>
+		 	 </div>       
+	    <section ng-view>
+	    </section>
+		</div>
+    </div>
+    
+    
+    	     <!--vendor js-->
+	    <script src="@routes.Assets.versioned("javascripts/lib/angular.min.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/lib/angular-route.min.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/lib/ui-bootstrap-tpls-0.14.3.min.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/lib/dirPagination.js")"
+	       type="text/javascript"></script>
+	     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	     <!--  -->
+	     
+	     <!-- app js -->
+	    <script src="@routes.Assets.versioned("javascripts/main.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/directives/directives.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/services/services.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/controllers/controllers.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/controllers/searchController.js")"
+	       type="text/javascript"></script>
+	    <script src="@routes.Assets.versioned("javascripts/controllers/analyticsController.js")"
+	       type="text/javascript"></script>
+	      <!--  -->
+  </body>
+</html>

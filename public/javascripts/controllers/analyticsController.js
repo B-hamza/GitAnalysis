@@ -72,7 +72,6 @@ angular.module('routeAppControllers').controller('AnalyticsController',['$scope'
 						}
 						
 					})
-					
 					$scope.doGetCommitsFromRepo();
 }]).filter('ListUsers', function(){
 	return function(input){

@@ -1,8 +1,6 @@
 <div class="panel-body">
- {{commits.length}}
-    
     <uib-accordion close-others="oneAtATime">
-    	 <uib-accordion-group ng-repeat = "commit in commits | visual : current* itemsPerPage| limitTo :itemsPerPage " heading="{{commit.commit.committer.date}} by {{commit.commit.committer.name}} " >
+    	 <uib-accordion-group ng-repeat = "commit in commits | visual : current* itemsPerPage| limitTo :itemsPerPage " heading="{{commit.commit.committer.date | date:	'dd-MM-yyyy, HH:mm '}} by {{commit.commit.committer.name}} " >
     	 	<img ng-src="{{commit.author.avatar_url}}" width=32 height=32> {{commit.commit.message}}
     	 </uib-accordion-group>
     	 
